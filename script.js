@@ -6,6 +6,9 @@ client.on('connect', function () {
 
     console.log("MQTT Connected");
 
+    document.getElementById("speed").innerHTML =
+      "MQTT Connected";
+
     client.subscribe('kmhe/gps');
 
 });
@@ -27,5 +30,11 @@ client.on('message', function (topic, message) {
 
     document.getElementById("lng").innerHTML =
       "Longitude : " + data.lng;
+
+});
+
+client.on('error', function(error) {
+
+    console.log("MQTT Error:", error);
 
 });
