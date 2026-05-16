@@ -30,7 +30,7 @@ href="style.css">
 
 <h1>MEKATRONIC TEAM TELEMETRY</h1>
 
-<p>KMHE  System</p>
+<p>KMHE System</p>
 
 </div>
 
@@ -77,25 +77,17 @@ href="style.css">
 
 <div class="gpsRow">
 
-<div>
-
 <p>LATITUDE</p>
 
 <h3 id="lat">0</h3>
 
 </div>
 
-</div>
-
 <div class="gpsRow">
-
-<div>
 
 <p>LONGITUDE</p>
 
 <h3 id="lng">0</h3>
-
-</div>
 
 </div>
 
@@ -138,6 +130,19 @@ href="style.css">
 
 </div>
 
+<!-- LAP HISTORY -->
+<div class="card">
+
+<h2>LAP HISTORY</h2>
+
+<div id="lapHistory">
+
+NO DATA
+
+</div>
+
+</div>
+
 <!-- BUTTON -->
 <div class="card">
 
@@ -148,7 +153,14 @@ href="style.css">
 <button class="startBtn"
 onclick="startRace()">
 
-START RACE
+START
+
+</button>
+
+<button class="stopBtn"
+onclick="stopRace()">
+
+STOP
 
 </button>
 
@@ -212,7 +224,7 @@ TRACK / ROUTE
 <div class="footer">
 
 <div>
-CONNECTED TO broker.hivemq.com:8884
+CONNECTED TO broker.hivemq.com
 </div>
 
 <div>
@@ -220,7 +232,7 @@ TOPIC : kmhe/gps
 </div>
 
 <div>
-DATA RECEIVING...
+MEKATRONIC TELEMETRY
 </div>
 
 </div>
