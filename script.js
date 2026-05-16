@@ -1,40 +1,33 @@
-const client = mqtt.connect(
-'wss://broker.hivemq.com:8884/mqtt'
-);
+const client = mqtt.connect('wss://broker.hivemq.com:8884/mqtt');
 
-client.on('connect', function () {
+const map = L.map('map').setView([-7.9222,112.5966], 18);
 
-    console.log("MQTT Connected");
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+attribution:'KMHE'
+}).addTo(map);
 
-    document.getElementById("speed").innerHTML =
-      "MQTT Connected";
+const marker = L.marker([-7.9222,112.5966]).addTo(map);
 
-    client.subscribe('kmhe/gps');
+setInterval(()=>{
+document.getElementById("clock").innerHTML =
+new Date().toLocaleTimeString();
+},1000);
 
+client.on('connect',()=>{
+document.getElementById("mqtt-status").innerHTML="ONLINE";
+client.subscribe("kmhe/gps");
 });
 
-client.on('message', function (topic, message) {
+client.on('message',(topic,msg)=>{
 
-    console.log(message.toString());
+const d = JSON.parse(msg.toString());
 
-    const data = JSON.parse(message.toString());
+document.getElementById("speed").innerHTML = d.speed.toFixed(1);
+document.getElementById("sat").innerHTML = d.sat;
+document.getElementById("lat").innerHTML = d.lat;
+document.getElementById("lng").innerHTML = d.lng;
 
-    document.getElementById("speed").innerHTML =
-      "Speed : " + data.speed + " km/h";
-
-    document.getElementById("sat").innerHTML =
-      "Satellite : " + data.sat;
-
-    document.getElementById("lat").innerHTML =
-      "Latitude : " + data.lat;
-
-    document.getElementById("lng").innerHTML =
-      "Longitude : " + data.lng;
-
-});
-
-client.on('error', function(error) {
-
-    console.log("MQTT Error:", error);
+marker.setLatLng([d.lat,d.lng]);
+map.setView([d.lat,d.lng]);
 
 });
