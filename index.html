@@ -1,36 +1,103 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
 
-  <title>KMHE TELEMETRY</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css">
+<title>MEKATRONIC TELEMETRY PRO</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
 </head>
 
 <body>
 
-  <h1>KMHE TELEMETRY</h1>
+<!-- BACKGROUND EFFECT -->
+<div class="bg"></div>
+<div class="grid"></div>
 
-  <div class="card">
+<div class="container">
 
-    <h2 id="speed">Speed : 0 km/h</h2>
+<header>
 
-    <h2 id="sat">Satellite : 0</h2>
+  <div>
+    <h1>MEKATRONIC TELEMETRY</h1>
+    <p>KMHE Real-Time Vehicle Monitoring System</p>
+  </div>
 
-    <h2 id="lat">Latitude : 0</h2>
+  <div class="status">
 
-    <h2 id="lng">Longitude : 0</h2>
+    <div id="mqtt-status">CONNECTING</div>
+    <div id="clock">00:00:00</div>
 
   </div>
 
-  <!-- MQTT Library -->
-  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+</header>
 
-  <!-- JS -->
-  <script src="script.js"></script>
+<main>
+
+<!-- LEFT -->
+<div class="left">
+
+  <div class="card speed">
+
+    <h2>SPEED</h2>
+    <div id="speed">0</div>
+    <span>km/h</span>
+
+  </div>
+
+  <div class="card small">
+
+    <div>
+      <h3>SAT</h3>
+      <p id="sat">0</p>
+    </div>
+
+    <div>
+      <h3>STATUS</h3>
+      <p>ONLINE</p>
+    </div>
+
+  </div>
+
+  <div class="card gps">
+
+    <h3>GPS DATA</h3>
+
+    <p>LAT: <span id="lat">0</span></p>
+    <p>LNG: <span id="lng">0</span></p>
+
+  </div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+
+  <div class="map-card">
+
+    <h2>LIVE TRACKING</h2>
+
+    <div id="map"></div>
+
+  </div>
+
+</div>
+
+</main>
+
+</div>
+
+<!-- LIB -->
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script src="script.js"></script>
 
 </body>
-
 </html>
