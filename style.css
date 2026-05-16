@@ -37,6 +37,7 @@ width:320px;
 display:flex;
 flex-direction:column;
 gap:10px;
+overflow:auto;
 }
 
 /* TITLE */
@@ -136,6 +137,11 @@ background:#13c000;
 color:white;
 }
 
+.stopBtn{
+background:#ffaa00;
+color:white;
+}
+
 .resetBtn{
 background:#ff0000;
 color:white;
@@ -216,7 +222,7 @@ color:#00ffee;
 font-size:12px;
 }
 
-/* RESPONSIVE HP */
+/* MOBILE */
 @media(max-width:900px){
 
 .dashboard{
