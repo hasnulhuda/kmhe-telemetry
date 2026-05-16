@@ -6,119 +6,230 @@ font-family:Arial;
 }
 
 body{
-background:#05070f;
+background:#020817;
 color:white;
-overflow-x:hidden;
+overflow:hidden;
 }
 
-/* CYBER GRADIENT BACKGROUND */
+/* BACKGROUND */
 .bg{
 position:fixed;
 width:100%;
 height:100%;
-background: radial-gradient(circle at 20% 20%, #00ffcc33, transparent 40%),
-            radial-gradient(circle at 80% 80%, #0066ff33, transparent 40%),
-            radial-gradient(circle at 50% 50%, #ff00ff22, transparent 60%);
-z-index:-2;
-}
-
-/* GRID EFFECT */
-.grid{
-position:fixed;
-width:100%;
-height:100%;
-background-image:
-linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-background-size:40px 40px;
+background:
+radial-gradient(circle at top,
+#00ffee22,
+transparent 60%);
 z-index:-1;
-opacity:0.3;
 }
 
-/* CONTAINER */
-.container{
-padding:20px;
-}
-
-/* HEADER */
-header{
+/* DASHBOARD */
+.dashboard{
 display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:20px;
+height:90vh;
+padding:10px;
+gap:10px;
 }
 
-h1{
-color:#00ffcc;
-letter-spacing:2px;
+/* SIDEBAR */
+.sidebar{
+width:320px;
+display:flex;
+flex-direction:column;
+gap:10px;
 }
 
-.status{
-text-align:right;
-color:#aaa;
+/* TITLE */
+.titleBox h1{
+font-size:32px;
+color:#00ffee;
 }
 
-/* MAIN */
-main{
-display:grid;
-grid-template-columns:320px 1fr;
-gap:20px;
+.titleBox p{
+font-size:18px;
+color:#ddd;
 }
 
 /* CARD */
 .card{
-background:rgba(10,15,25,0.8);
-border:1px solid rgba(0,255,204,0.2);
-border-radius:15px;
-padding:20px;
-backdrop-filter:blur(10px);
-box-shadow:0 0 20px rgba(0,255,204,0.1);
-margin-bottom:15px;
+background:#071427;
+border:1px solid #00ffee33;
+border-radius:16px;
+padding:15px;
+box-shadow:0 0 10px #00ffee11;
+}
+
+.card h2{
+color:#00ffee;
+margin-bottom:10px;
+font-size:18px;
 }
 
 /* SPEED */
-.speed{
+.speedValue{
 text-align:center;
-}
-
-.speed #speed{
-font-size:70px;
-color:#00ffcc;
+font-size:60px;
 font-weight:bold;
+color:#00ffee;
 }
 
-/* SMALL CARD */
-.small{
+.speedValue small{
+font-size:22px;
+}
+
+/* SAT */
+.satBox{
 display:flex;
-justify-content:space-between;
+align-items:center;
+gap:15px;
+}
+
+.satIcon{
+font-size:45px;
 }
 
 /* GPS */
-.gps{
+.gpsRow{
+margin-bottom:10px;
+}
+
+.gpsRow p{
+color:#aaa;
+font-size:12px;
+}
+
+.gpsRow h3{
+font-size:22px;
+color:#00ffee;
+}
+
+/* TIME */
+.timeRow{
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
+}
+
+.timeRow h3{
+color:#00ffee;
+font-size:22px;
+}
+
+/* BUTTON */
+.buttonGroup{
+display:flex;
+gap:10px;
+}
+
+button{
+flex:1;
+padding:12px;
+border:none;
+border-radius:10px;
 font-size:14px;
-color:#ccc;
+font-weight:bold;
+cursor:pointer;
+}
+
+.startBtn{
+background:#13c000;
+color:white;
+}
+
+.resetBtn{
+background:#ff0000;
+color:white;
 }
 
 /* MAP */
-.map-card{
-background:rgba(10,15,25,0.8);
-padding:20px;
-border-radius:15px;
-border:1px solid rgba(0,255,204,0.2);
+.mapSection{
+flex:1;
+position:relative;
+height:100%;
 }
 
 #map{
-height:650px;
+width:100%;
+height:100%;
+border-radius:20px;
+overflow:hidden;
+}
+
+/* STATUS */
+.topStatus{
+position:absolute;
+top:10px;
+right:10px;
+display:flex;
+gap:10px;
+z-index:1000;
+}
+
+.statusBox{
+background:#071427dd;
+padding:12px;
+border-radius:12px;
+border:1px solid #00ffee33;
+text-align:center;
+min-width:130px;
+font-size:12px;
+}
+
+.statusBox h2{
+margin-top:5px;
+font-size:18px;
+color:#00ff66;
+}
+
+/* ROUTE */
+.routeBox{
+position:absolute;
+bottom:15px;
+right:15px;
+background:#071427dd;
+padding:10px 20px;
+border-radius:12px;
+display:flex;
+align-items:center;
+gap:10px;
+z-index:1000;
+font-size:14px;
+}
+
+.line{
+width:40px;
+height:4px;
+background:#00ffee;
 border-radius:10px;
-margin-top:10px;
 }
 
-/* RESPONSIVE */
+/* FOOTER */
+.footer{
+height:5vh;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 15px;
+background:#071427;
+border-top:1px solid #00ffee22;
+color:#00ffee;
+font-size:12px;
+}
+
+/* RESPONSIVE HP */
 @media(max-width:900px){
-main{
-grid-template-columns:1fr;
+
+.dashboard{
+flex-direction:column;
+overflow:auto;
 }
+
+.sidebar{
+width:100%;
+}
+
 #map{
-height:400px;
+height:500px;
 }
+
 }
