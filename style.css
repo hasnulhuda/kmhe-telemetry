@@ -2,138 +2,244 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial,sans-serif;
 }
 
+/* ================= BODY ================= */
+
+html,
 body{
+width:100%;
+height:100%;
+overflow:hidden;
 background:#020817;
 color:white;
-overflow:hidden;
 }
 
-/* BACKGROUND */
+/* ================= BACKGROUND ================= */
+
 .bg{
 position:fixed;
+top:0;
+left:0;
 width:100%;
 height:100%;
 background:
-radial-gradient(circle at top,
+radial-gradient(
+circle at top,
 #00ffee22,
-transparent 60%);
+transparent 60%
+);
 z-index:-1;
 }
 
-/* DASHBOARD */
+/* ================= DASHBOARD ================= */
+
 .dashboard{
 display:flex;
-height:90vh;
-padding:10px;
-gap:10px;
+width:100vw;
+height:100vh;
+padding:8px;
+gap:8px;
+overflow:hidden;
 }
 
-/* SIDEBAR */
+/* ================= SIDEBAR ================= */
+
 .sidebar{
-width:320px;
+width:27%;
+height:100%;
 display:flex;
 flex-direction:column;
-gap:10px;
-overflow:auto;
+gap:6px;
 }
 
-/* TITLE */
+/* ================= TITLE ================= */
+
+.titleBox{
+padding:4px 2px;
+}
+
 .titleBox h1{
-font-size:32px;
+font-size:34px;
+line-height:34px;
+font-weight:bold;
 color:#00ffee;
 }
 
 .titleBox p{
-font-size:18px;
-color:#ddd;
+font-size:16px;
+margin-top:2px;
+color:#cccccc;
 }
 
-/* CARD */
+/* ================= CARD ================= */
+
 .card{
 background:#071427;
 border:1px solid #00ffee33;
-border-radius:16px;
-padding:15px;
-box-shadow:0 0 10px #00ffee11;
+border-radius:14px;
+padding:10px;
+box-shadow:
+0 0 10px #00ffee11;
 }
+
+/* ================= CARD TITLE ================= */
 
 .card h2{
 color:#00ffee;
-margin-bottom:10px;
-font-size:18px;
+margin-bottom:6px;
+font-size:16px;
 }
 
-/* SPEED */
+/* ================= SPEED ================= */
+
+.speedCard{
+padding-top:14px;
+padding-bottom:14px;
+}
+
 .speedValue{
+font-size:62px;
 text-align:center;
-font-size:60px;
 font-weight:bold;
 color:#00ffee;
+line-height:62px;
 }
 
 .speedValue small{
-font-size:22px;
+font-size:20px;
 }
 
-/* SAT */
-.satBox{
-display:flex;
-align-items:center;
-gap:15px;
-}
+/* ================= TIME ================= */
 
-.satIcon{
-font-size:45px;
-}
-
-/* GPS */
-.gpsRow{
-margin-bottom:10px;
-}
-
-.gpsRow p{
-color:#aaa;
-font-size:12px;
-}
-
-.gpsRow h3{
-font-size:22px;
-color:#00ffee;
-}
-
-/* TIME */
 .timeRow{
 display:flex;
 justify-content:space-between;
-margin-bottom:10px;
+margin-bottom:6px;
+}
+
+.timeRow p{
+font-size:13px;
 }
 
 .timeRow h3{
+font-size:20px;
 color:#00ffee;
-font-size:22px;
 }
 
-/* BUTTON */
+/* ================= LAP HISTORY ================= */
+
+.lapCard{
+flex:1.8;
+display:flex;
+flex-direction:column;
+min-height:0;
+height:100%;
+}
+
+#lapHistory{
+
+flex:1;
+
+display:grid;
+
+/* TOTAL 3 KOLOM */
+grid-template-columns:repeat(3,1fr);
+
+/* TOTAL 15 BARIS */
+grid-template-rows:repeat(15,1fr);
+
+/* ISI KEBAWAH DULU */
+grid-auto-flow:column;
+
+gap:6px;
+
+overflow:hidden;
+
+align-content:start;
+
+padding-top:4px;
+
+}
+
+/* ITEM LAP */
+
+#lapHistory p{
+
+background:#0b1c33;
+
+padding:8px 12px;
+
+border-radius:10px;
+
+border-left:4px solid #00ffee;
+
+/* ANGKA DIPERBESAR */
+font-size:17px;
+
+font-weight:bold;
+
+letter-spacing:0.5px;
+
+color:white;
+
+display:flex;
+align-items:center;
+
+white-space:nowrap;
+
+overflow:hidden;
+
+text-overflow:ellipsis;
+
+}
+
+/* ================= SELECT ================= */
+
+select{
+width:100%;
+padding:9px;
+margin-bottom:8px;
+border:none;
+border-radius:8px;
+background:#0b1c33;
+color:white;
+font-size:13px;
+outline:none;
+}
+
+/* ================= BUTTON ================= */
+
 .buttonGroup{
 display:flex;
-gap:10px;
+gap:6px;
 }
 
 button{
 flex:1;
-padding:12px;
+padding:10px;
 border:none;
-border-radius:10px;
-font-size:14px;
+border-radius:8px;
+font-size:12px;
 font-weight:bold;
 cursor:pointer;
+transition:0.3s;
 }
+
+button:hover{
+transform:scale(1.02);
+}
+
+/* ================= BUTTON COLORS ================= */
 
 .startBtn{
 background:#13c000;
+color:white;
+}
+
+.lapBtn{
+background:#00a2ff;
 color:white;
 }
 
@@ -143,25 +249,78 @@ color:white;
 }
 
 .resetBtn{
-background:#ff0000;
+background:#ff0033;
 color:white;
 }
 
-/* MAP */
+/* ================= SAT + GPS ================= */
+
+.bottomInfo{
+display:flex;
+gap:6px;
+}
+
+/* ================= MINI CARD ================= */
+
+.miniCard{
+flex:1;
+}
+
+/* ================= SAT ================= */
+
+.satBox{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.satIcon{
+font-size:24px;
+}
+
+#sat{
+font-size:24px;
+color:#00ffee;
+}
+
+/* ================= GPS ================= */
+
+.gpsRow{
+margin-bottom:6px;
+}
+
+.gpsRow p{
+font-size:11px;
+color:#aaaaaa;
+}
+
+.gpsRow h3{
+font-size:15px;
+color:#00ffee;
+}
+
+/* ================= MAP SECTION ================= */
+
 .mapSection{
 flex:1;
-position:relative;
 height:100%;
+position:relative;
 }
+
+/* ================= MAP ================= */
 
 #map{
 width:100%;
 height:100%;
-border-radius:20px;
+border-radius:18px;
 overflow:hidden;
+border:2px solid #ffffff22;
+box-shadow:
+0 0 12px #00000088;
 }
 
-/* STATUS */
+/* ================= STATUS ================= */
+
 .topStatus{
 position:absolute;
 top:10px;
@@ -171,35 +330,39 @@ gap:10px;
 z-index:1000;
 }
 
+/* ================= STATUS BOX ================= */
+
 .statusBox{
 background:#071427dd;
-padding:12px;
+padding:10px;
 border-radius:12px;
 border:1px solid #00ffee33;
 text-align:center;
-min-width:130px;
-font-size:12px;
+min-width:110px;
+backdrop-filter:blur(10px);
 }
 
 .statusBox h2{
-margin-top:5px;
-font-size:18px;
+margin-top:4px;
+font-size:16px;
 color:#00ff66;
 }
 
-/* ROUTE */
+/* ================= ROUTE ================= */
+
 .routeBox{
 position:absolute;
-bottom:15px;
-right:15px;
-background:#071427dd;
-padding:10px 20px;
+bottom:10px;
+right:10px;
+padding:10px 16px;
 border-radius:12px;
+background:#071427dd;
 display:flex;
 align-items:center;
 gap:10px;
 z-index:1000;
-font-size:14px;
+backdrop-filter:blur(10px);
+font-size:13px;
 }
 
 .line{
@@ -209,21 +372,15 @@ background:#00ffee;
 border-radius:10px;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
+
 .footer{
-height:5vh;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:0 15px;
-background:#071427;
-border-top:1px solid #00ffee22;
-color:#00ffee;
-font-size:12px;
+display:none;
 }
 
-/* MOBILE */
-@media(max-width:900px){
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1200px){
 
 .dashboard{
 flex-direction:column;
@@ -232,10 +389,41 @@ overflow:auto;
 
 .sidebar{
 width:100%;
+height:auto;
 }
 
-#map{
-height:500px;
+.mapSection{
+height:600px;
+}
+
+.lapCard{
+height:350px;
+}
+
+}
+
+@media(max-width:700px){
+
+.titleBox h1{
+font-size:28px;
+line-height:28px;
+}
+
+.speedValue{
+font-size:50px;
+line-height:50px;
+}
+
+.buttonGroup{
+flex-wrap:wrap;
+}
+
+button{
+min-width:48%;
+}
+
+.bottomInfo{
+flex-direction:column;
 }
 
 }
