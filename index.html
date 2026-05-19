@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
@@ -23,18 +24,22 @@ href="style.css">
 
 <div class="dashboard">
 
-<!-- LEFT PANEL -->
+<!-- ================= SIDEBAR ================= -->
+
 <div class="sidebar">
+
+<!-- TITLE -->
 
 <div class="titleBox">
 
 <h1>MEKATRONIC TEAM TELEMETRY</h1>
 
-<p>KMHE System</p>
+<p>KMHE SYSTEM</p>
 
 </div>
 
 <!-- SPEED -->
+
 <div class="card speedCard">
 
 <h2>SPEED</h2>
@@ -49,51 +54,8 @@ href="style.css">
 
 </div>
 
-<!-- SAT -->
-<div class="card">
-
-<h2>SATELLITE</h2>
-
-<div class="satBox">
-
-<div class="satIcon">🛰</div>
-
-<div>
-
-<h1 id="sat">0</h1>
-
-<p>Satellites</p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- GPS -->
-<div class="card">
-
-<h2>GPS COORDINATES</h2>
-
-<div class="gpsRow">
-
-<p>LATITUDE</p>
-
-<h3 id="lat">0</h3>
-
-</div>
-
-<div class="gpsRow">
-
-<p>LONGITUDE</p>
-
-<h3 id="lng">0</h3>
-
-</div>
-
-</div>
-
 <!-- TIME -->
+
 <div class="card">
 
 <h2>TIME</h2>
@@ -102,9 +64,7 @@ href="style.css">
 
 <p>TOTAL TIME</p>
 
-<h3 id="totalTime">
-00:00
-</h3>
+<h3 id="totalTime">00:00</h3>
 
 </div>
 
@@ -112,9 +72,7 @@ href="style.css">
 
 <p>BEST LAP</p>
 
-<h3 id="bestLap">
-00:00
-</h3>
+<h3 id="bestLap">00:00</h3>
 
 </div>
 
@@ -122,16 +80,15 @@ href="style.css">
 
 <p>LAST LAP</p>
 
-<h3 id="lastLap">
-00:00
-</h3>
+<h3 id="lastLap">00:00</h3>
 
 </div>
 
 </div>
 
 <!-- LAP HISTORY -->
-<div class="card">
+
+<div class="card lapCard">
 
 <h2>LAP HISTORY</h2>
 
@@ -143,10 +100,23 @@ NO DATA
 
 </div>
 
-<!-- BUTTON -->
+<!-- CONTROLS -->
+
 <div class="card">
 
 <h2>CONTROLS</h2>
+
+<select id="modeSelect">
+
+<option value="auto">
+AUTO MODE
+</option>
+
+<option value="manual">
+MANUAL MODE
+</option>
+
+</select>
 
 <div class="buttonGroup">
 
@@ -154,6 +124,14 @@ NO DATA
 onclick="startRace()">
 
 START
+
+</button>
+
+<button class="lapBtn"
+id="lapBtn"
+onclick="manualLap()">
+
+LAP
 
 </button>
 
@@ -175,12 +153,66 @@ RESET
 
 </div>
 
+<!-- SAT + GPS -->
+
+<div class="bottomInfo">
+
+<!-- SAT -->
+
+<div class="card miniCard">
+
+<h2>SATELLITE</h2>
+
+<div class="satBox">
+
+<div class="satIcon">🛰</div>
+
+<div>
+
+<h1 id="sat">0</h1>
+
+<p>Satellites</p>
+
 </div>
 
-<!-- MAP -->
+</div>
+
+</div>
+
+<!-- GPS -->
+
+<div class="card miniCard">
+
+<h2>GPS COORDINATES</h2>
+
+<div class="gpsRow">
+
+<p>LATITUDE</p>
+
+<h3 id="lat">0</h3>
+
+</div>
+
+<div class="gpsRow">
+
+<p>LONGITUDE</p>
+
+<h3 id="lng">0</h3>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= MAP ================= -->
+
 <div class="mapSection">
 
 <!-- STATUS -->
+
 <div class="topStatus">
 
 <div class="statusBox">
@@ -188,7 +220,9 @@ RESET
 MQTT STATUS
 
 <h2 id="mqtt-status">
+
 ONLINE
+
 </h2>
 
 </div>
@@ -198,16 +232,21 @@ ONLINE
 LAP STATUS
 
 <h2 id="lapStatus">
+
 READY
+
 </h2>
 
 </div>
 
 </div>
 
+<!-- MAP -->
+
 <div id="map"></div>
 
 <!-- ROUTE -->
+
 <div class="routeBox">
 
 <div class="line"></div>
@@ -216,23 +255,6 @@ TRACK / ROUTE
 
 </div>
 
-</div>
-
-</div>
-
-<!-- FOOTER -->
-<div class="footer">
-
-<div>
-CONNECTED TO broker.hivemq.com
-</div>
-
-<div>
-TOPIC : kmhe/gps
-</div>
-
-<div>
-MEKATRONIC TELEMETRY
 </div>
 
 </div>
