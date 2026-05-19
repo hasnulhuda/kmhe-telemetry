@@ -1,15 +1,18 @@
 // ================= MQTT =================
+
 const client =
 mqtt.connect(
 'wss://broker.hivemq.com:8884/mqtt'
 );
 
 // ================= MAP =================
+
 const map =
 L.map('map')
 .setView([-7.9222,112.5966],18);
 
 // ================= GOOGLE MAP =================
+
 L.tileLayer(
 'https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',
 {
@@ -19,6 +22,7 @@ maxZoom:22
 ).addTo(map);
 
 // ================= ICON MOBIL =================
+
 const carIcon =
 L.icon({
 
@@ -31,6 +35,7 @@ iconAnchor:[30,30]
 });
 
 // ================= MARKER =================
+
 const marker =
 L.marker(
 [-7.9222,112.5966],
@@ -38,6 +43,7 @@ L.marker(
 ).addTo(map);
 
 // ================= ROUTE =================
+
 let route = [];
 
 const polyline =
@@ -49,18 +55,22 @@ weight:5
 }).addTo(map);
 
 // ================= TIMER =================
+
 let totalInterval;
 let startTime;
 let lapStartTime;
 
 // ================= LAP =================
+
 let lapCount = 0;
 let bestLap = null;
 
 // ================= RACE =================
+
 let raceRunning = false;
 
 // ================= AUTO LAP =================
+
 let startLat = null;
 let startLng = null;
 
@@ -68,7 +78,42 @@ const lapRadius = 0.00008;
 
 let lapCooldown = false;
 
+// ================= HIDE LAP BUTTON =================
+
+document.getElementById(
+"lapBtn"
+).style.display = "none";
+
+// ================= MODE CHANGE =================
+
+document.getElementById(
+"modeSelect"
+).addEventListener("change",()=>{
+
+const mode =
+document.getElementById(
+"modeSelect"
+).value;
+
+const lapBtn =
+document.getElementById(
+"lapBtn"
+);
+
+if(mode === "auto"){
+
+lapBtn.style.display = "none";
+
+}else{
+
+lapBtn.style.display = "block";
+
+}
+
+});
+
 // ================= START =================
+
 function startRace(){
 
 raceRunning = true;
@@ -93,7 +138,17 @@ startTime = Date.now();
 
 lapStartTime = Date.now();
 
+// RESET AUTO LAP
+
+startLat = null;
+startLng = null;
+
+lapCooldown = false;
+
 // TOTAL TIMER
+
+clearInterval(totalInterval);
+
 totalInterval =
 setInterval(()=>{
 
@@ -111,6 +166,7 @@ sec = sec % 60;
 document.getElementById(
 "totalTime"
 ).innerHTML =
+
 String(min).padStart(2,'0')
 + ":" +
 String(sec).padStart(2,'0');
@@ -120,6 +176,7 @@ String(sec).padStart(2,'0');
 }
 
 // ================= STOP =================
+
 function stopRace(){
 
 raceRunning = false;
@@ -133,6 +190,7 @@ document.getElementById(
 }
 
 // ================= RESET =================
+
 function resetRace(){
 
 raceRunning = false;
@@ -146,6 +204,9 @@ polyline.setLatLngs([]);
 lapCount = 0;
 
 bestLap = null;
+
+startLat = null;
+startLng = null;
 
 document.getElementById(
 "lapStatus"
@@ -165,11 +226,12 @@ document.getElementById(
 
 document.getElementById(
 "lapHistory"
-).innerHTML = "";
+).innerHTML = "NO DATA";
 
 }
 
 // ================= FORMAT TIME =================
+
 function formatTime(ms){
 
 let sec =
@@ -181,15 +243,21 @@ Math.floor(sec/60);
 sec = sec % 60;
 
 return (
+
 String(min).padStart(2,'0')
 + ":" +
 String(sec).padStart(2,'0')
+
 );
 
 }
 
 // ================= ADD LAP =================
+
 function addLap(){
+
+// MAX 45 LAP
+if(lapCount >= 45) return;
 
 lapCount++;
 
@@ -202,11 +270,13 @@ let lapText =
 formatTime(lapNow);
 
 // LAST LAP
+
 document.getElementById(
 "lastLap"
 ).innerHTML = lapText;
 
 // BEST LAP
+
 if(bestLap == null || lapNow < bestLap){
 
 bestLap = lapNow;
@@ -218,9 +288,19 @@ document.getElementById(
 }
 
 // HISTORY
+
+const lapHistory =
 document.getElementById(
 "lapHistory"
-).innerHTML +=
+);
+
+if(lapCount == 1){
+
+lapHistory.innerHTML = "";
+
+}
+
+lapHistory.innerHTML +=
 
 "<p>LAP "
 + lapCount +
@@ -230,7 +310,25 @@ lapText +
 
 }
 
+// ================= MANUAL LAP =================
+
+function manualLap(){
+
+const mode =
+document.getElementById(
+"modeSelect"
+).value;
+
+if(mode !== "manual") return;
+
+if(!raceRunning) return;
+
+addLap();
+
+}
+
 // ================= MQTT CONNECT =================
+
 client.on('connect',()=>{
 
 document.getElementById(
@@ -242,12 +340,14 @@ client.subscribe("kmhe/gps");
 });
 
 // ================= GPS DATA =================
+
 client.on('message',(topic,msg)=>{
 
 const d =
 JSON.parse(msg.toString());
 
 // UI
+
 document.getElementById(
 "speed"
 ).innerHTML =
@@ -268,19 +368,22 @@ document.getElementById(
 ).innerHTML =
 d.lng.toFixed(6);
 
-// MOVE MOBIL
+// MOVE CAR
+
 marker.setLatLng([
 d.lat,
 d.lng
 ]);
 
 // FOLLOW MAP
+
 map.panTo([
 d.lat,
 d.lng
 ]);
 
 // ROUTE
+
 route.push([
 d.lat,
 d.lng
@@ -289,40 +392,56 @@ d.lng
 polyline.setLatLngs(route);
 
 // AUTO LAP
-if(raceRunning){
 
-// SET START
+const mode =
+document.getElementById(
+"modeSelect"
+).value;
+
+if(
+raceRunning &&
+mode === "auto"
+){
+
 if(startLat == null){
 
 startLat = d.lat;
 startLng = d.lng;
 
+return;
+
 }
 
-// DISTANCE
 let dLat =
 Math.abs(d.lat - startLat);
 
 let dLng =
 Math.abs(d.lng - startLng);
 
-// CHECK START AREA
 if(
+
 dLat < lapRadius &&
 dLng < lapRadius &&
 !lapCooldown
+
 ){
+
+let currentLapTime =
+Date.now() - lapStartTime;
+
+if(currentLapTime > 10000){
 
 addLap();
 
 lapCooldown = true;
 
-// COOLDOWN
 setTimeout(()=>{
 
 lapCooldown = false;
 
-},5000);
+},8000);
+
+}
 
 }
 
